@@ -33,7 +33,7 @@ public final class SkillHudState {
 		animStartMs = Util.getMillis();
 
 		if (payload.levelUp()) {
-			client.gui.toastManager().addToast(new SkillLevelUpToast(updated, payload.fromLevel(), payload.level()));
+			client.getToastManager().addToast(new SkillLevelUpToast(updated, payload.fromLevel(), payload.level()));
 		}
 	}
 

@@ -58,7 +58,7 @@ public class SpecialitiesClient implements ClientModInitializer {
 			}
 
 			Button button = Button.builder(Component.literal("S"),
-							b -> client.gui.setScreen(new SkillsScreen(screen)))
+							b -> client.setScreen(new SkillsScreen(screen)))
 					.bounds(0, 0, 20, 20)
 					.tooltip(Tooltip.create(Component.translatable("screen.specialities.skills")))
 					.build();
