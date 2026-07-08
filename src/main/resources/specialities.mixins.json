@@ -7,11 +7,16 @@
 		"AbstractArrowMixin",
 		"BlockMixin",
 		"BowItemMixin",
+		"BrewingStandBlockEntityMixin",
+		"BrewingStandMenuMixin",
 		"CrossbowItemMixin",
+		"EnchantedItemTriggerMixin",
 		"EnchantmentHelperMixin",
 		"FishingHookMixin",
+		"FurnaceResultSlotMixin",
 		"LivingEntityMixin",
-		"PlayerMixin"
+		"PlayerMixin",
+		"ResultSlotMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

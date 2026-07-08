@@ -113,6 +113,52 @@ public final class Tuning {
 		return 2.0F + 0.25F * (level / 25);
 	}
 
+	// --- Smithing ---
+	/**
+	 * Resourcefulness: chance that the n-th (1-based) bonus material is returned
+	 * from a craft. At level 100: 100% for one item, 50% for a second, 25% for a
+	 * third, and so on.
+	 */
+	public static float smithingReturnChance(final int level, final int nthItem) {
+		return (level / (float) MAX_LEVEL) / (1 << (nthItem - 1));
+	}
+
+	/** Smelting multicraft: chances (at the given level) for x8 / x4 / x2 output. */
+	public static float smeltChanceX8(final int level) {
+		return 0.05F * level / MAX_LEVEL;
+	}
+
+	public static float smeltChanceX4(final int level) {
+		return 0.10F * level / MAX_LEVEL;
+	}
+
+	public static float smeltChanceX2(final int level) {
+		return 0.25F * level / MAX_LEVEL;
+	}
+
+	// --- Alchemy ---
+	/** XP per brewing cycle (one ingredient, up to three bottles). */
+	public static final int ALCHEMY_BREW_XP = 100;
+
+	/** Chance the brewing ingredient is not consumed: up to 50% at level 100. */
+	public static float alchemyReturnChance(final int level) {
+		return 0.5F * level / MAX_LEVEL;
+	}
+
+	// --- Enchanting ---
+	/** XP per enchant, multiplied by the lapis tier used (1-3). */
+	public static final int ENCHANT_XP_PER_TIER = 120;
+
+	/** Chance an enchant costs ~50% less XP levels: 100% at level 100. */
+	public static float enchantDiscountChance(final int level) {
+		return level / (float) MAX_LEVEL;
+	}
+
+	/** Chance for a free enchantment upgrade/addition: capped at 50% at level 100. */
+	public static float enchantLuckChance(final int level) {
+		return 0.5F * level / MAX_LEVEL;
+	}
+
 	/** XP needed to go from {@code level} to {@code level + 1}. */
 	public static int xpToNext(final int level) {
 		return level >= MAX_LEVEL ? 0 : 50 + 15 * level;

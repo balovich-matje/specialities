@@ -23,6 +23,12 @@
 	"item.specialities.athletics-knowledge-100": "Athletics Knowledge (+100)",
 	"item.specialities.sneaking-knowledge-25": "Sneaking Knowledge (+25)",
 	"item.specialities.sneaking-knowledge-100": "Sneaking Knowledge (+100)",
+	"item.specialities.smithing-knowledge-25": "Smithing Knowledge (+25)",
+	"item.specialities.smithing-knowledge-100": "Smithing Knowledge (+100)",
+	"item.specialities.alchemy-knowledge-25": "Alchemy Knowledge (+25)",
+	"item.specialities.alchemy-knowledge-100": "Alchemy Knowledge (+100)",
+	"item.specialities.enchanting-knowledge-25": "Enchanting Knowledge (+25)",
+	"item.specialities.enchanting-knowledge-100": "Enchanting Knowledge (+100)",
 
 	"skill.specialities.mining": "Mining",
 	"skill.specialities.woodcutting": "Woodcutting",
@@ -36,6 +42,9 @@
 	"skill.specialities.acrobatics": "Acrobatics",
 	"skill.specialities.athletics": "Athletics",
 	"skill.specialities.sneaking": "Sneaking",
+	"skill.specialities.smithing": "Smithing",
+	"skill.specialities.alchemy": "Alchemy",
+	"skill.specialities.enchanting": "Enchanting",
 
 	"toast.specialities.levelup.desc": "Increased %s -> %s",
 
@@ -68,6 +77,11 @@
 	"tooltip.specialities.detection": "-%s%% mob detection range while sneaking",
 	"tooltip.specialities.heavy_armor": "Heavy armor: -25%% of the bonus per piece",
 	"tooltip.specialities.stealth_crit": "Stealth crit x%s (once per enemy)",
+	"tooltip.specialities.resourcefulness": "%s%% chance to recover materials when crafting gear",
+	"tooltip.specialities.smelt_multicraft": "Smelting multicraft: %s%% x2, %s%% x4, %s%% x8",
+	"tooltip.specialities.brew_return": "%s%% chance brewing ingredients aren't consumed",
+	"tooltip.specialities.enchant_discount": "%s%% chance enchants cost half the XP",
+	"tooltip.specialities.enchant_luck": "%s%% chance for a bonus or upgraded enchantment",
 
 	"tool.specialities.pickaxes": "pickaxes",
 	"tool.specialities.axes": "axes",

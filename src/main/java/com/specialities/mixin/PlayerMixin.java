@@ -60,6 +60,27 @@ public abstract class PlayerMixin {
 		return original * Tuning.recoveryTimeMultiplier(level);
 	}
 
+	/**
+	 * Enchanting resourcefulness: chance (100% at level 100) that an enchanting
+	 * table enchant deducts only half the XP levels. The full amount is still
+	 * required to click the button; only the deduction shrinks.
+	 */
+	@ModifyVariable(method = "onEnchantmentPerformed", at = @At("HEAD"), argsOnly = true)
+	private int specialities$enchantDiscount(final int cost) {
+		Player self = (Player) (Object) this;
+
+		if (self.level().isClientSide()) {
+			return cost;
+		}
+
+		int level = SkillManager.get(self).level(Skill.ENCHANTING);
+		if (level <= 0 || self.getRandom().nextFloat() >= Tuning.enchantDiscountChance(level)) {
+			return cost;
+		}
+
+		return (cost + 1) / 2;
+	}
+
 	/** Athletics: up to -50% hunger cost while sprinting. */
 	@ModifyVariable(method = "causeFoodExhaustion", at = @At("HEAD"), argsOnly = true)
 	private float specialities$sprintExhaustion(final float amount) {

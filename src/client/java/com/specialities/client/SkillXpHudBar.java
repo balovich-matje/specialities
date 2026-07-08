@@ -172,6 +172,9 @@ public final class SkillXpHudBar {
 			case ACROBATICS -> Identifier.withDefaultNamespace("item/feather");
 			case ATHLETICS -> Identifier.withDefaultNamespace("item/golden_boots");
 			case SNEAKING -> Identifier.withDefaultNamespace("item/leather_boots");
+			case SMITHING -> Identifier.withDefaultNamespace("item/iron_ingot");
+			case ALCHEMY -> Identifier.withDefaultNamespace("item/brewing_stand");
+			case ENCHANTING -> Identifier.withDefaultNamespace("item/enchanted_book");
 		};
 	}
 }

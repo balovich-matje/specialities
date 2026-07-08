@@ -19,7 +19,10 @@ public enum Skill {
 	DEFENCE("defence", 0xFFD4A32C, () -> Items.IRON_CHESTPLATE),
 	ACROBATICS("acrobatics", 0xFFCC66CC, () -> Items.FEATHER),
 	ATHLETICS("athletics", 0xFF55DDCC, () -> Items.GOLDEN_BOOTS),
-	SNEAKING("sneaking", 0xFF9977DD, () -> Items.LEATHER_BOOTS);
+	SNEAKING("sneaking", 0xFF9977DD, () -> Items.LEATHER_BOOTS),
+	SMITHING("smithing", 0xFFE89040, () -> Items.ANVIL),
+	ALCHEMY("alchemy", 0xFFEE6699, () -> Items.BREWING_STAND),
+	ENCHANTING("enchanting", 0xFFAA55EE, () -> Items.ENCHANTED_BOOK);
 
 	private final String id;
 	private final int color;

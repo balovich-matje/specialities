@@ -94,7 +94,7 @@ public final class SkillCategories {
 			case ARCHERY -> stack.is(ModTags.RANGED_WEAPONS);
 			case FISHING -> stack.is(Items.FISHING_ROD);
 			case DEFENCE -> stack.is(Items.SHIELD);
-			case ACROBATICS, ATHLETICS, SNEAKING -> false;
+			case ACROBATICS, ATHLETICS, SNEAKING, SMITHING, ALCHEMY, ENCHANTING -> false;
 		};
 	}
 
