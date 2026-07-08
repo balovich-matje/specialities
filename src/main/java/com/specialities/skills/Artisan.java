@@ -1,0 +1,166 @@
+package com.specialities.skills;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import com.specialities.ModAttachments;
+import com.specialities.ModTags;
+
+import net.fabricmc.fabric.api.attachment.v1.AttachmentTarget;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.EnchantmentTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
+import org.jspecify.annotations.Nullable;
+
+/**
+ * Shared helpers for the artisan skills (smithing, alchemy, enchanting).
+ */
+public final class Artisan {
+	private Artisan() {
+	}
+
+	/** Tools, weapons, and armor pieces train smithing when crafted. */
+	public static boolean isSmithingResult(final ItemStack stack) {
+		if (stack.is(ModTags.SMITHING_ITEMS)) {
+			return true;
+		}
+
+		Equippable equippable = stack.get(DataComponents.EQUIPPABLE);
+		return equippable != null
+				&& equippable.slot().getType() == EquipmentSlot.Type.HUMANOID_ARMOR
+				&& stack.isDamageableItem();
+	}
+
+	/** Number of bonus materials returned by smithing resourcefulness. */
+	public static int rollSmithingReturns(final RandomSource random, final int level) {
+		int returned = 0;
+		while (random.nextFloat() < Tuning.smithingReturnChance(level, returned + 1)) {
+			returned++;
+		}
+
+		return returned;
+	}
+
+	/** Smelting multicraft multiplier for a single smelted item: 1, 2, 4, or 8. */
+	public static int rollSmeltMultiplier(final RandomSource random, final int level) {
+		float roll = random.nextFloat();
+
+		if (roll < Tuning.smeltChanceX8(level)) {
+			return 8;
+		}
+
+		if (roll < Tuning.smeltChanceX8(level) + Tuning.smeltChanceX4(level)) {
+			return 4;
+		}
+
+		if (roll < Tuning.smeltChanceX8(level) + Tuning.smeltChanceX4(level) + Tuning.smeltChanceX2(level)) {
+			return 2;
+		}
+
+		return 1;
+	}
+
+	/** The player who last opened this brewing stand, if online. */
+	public static @Nullable ServerPlayer brewingOwner(final Level level, final BlockPos pos) {
+		if (!(level instanceof ServerLevel serverLevel)
+				|| !(level.getBlockEntity(pos) instanceof BrewingStandBlockEntity stand)) {
+			return null;
+		}
+
+		String uuid = ((AttachmentTarget) stand).getAttached(ModAttachments.BREWING_OWNER);
+		if (uuid == null) {
+			return null;
+		}
+
+		return serverLevel.getServer().getPlayerList().getPlayer(UUID.fromString(uuid));
+	}
+
+	/**
+	 * Enchanting luck: upgrade a random existing enchantment by one level, or
+	 * add a compatible non-curse table enchantment at level 1.
+	 */
+	public static void applyEnchantLuck(final ServerPlayer player, final ItemStack stack) {
+		DataComponentType<ItemEnchantments> componentType = EnchantmentHelper.getComponentType(stack);
+		ItemEnchantments current = stack.getOrDefault(componentType, ItemEnchantments.EMPTY);
+		RandomSource random = player.getRandom();
+
+		List<Holder<Enchantment>> upgradable = current.keySet().stream()
+				.filter(holder -> current.getLevel(holder) < holder.value().getMaxLevel())
+				.toList();
+
+		List<Holder<Enchantment>> addable = addableEnchantments(player, stack, current);
+
+		boolean upgrade;
+		if (!upgradable.isEmpty() && !addable.isEmpty()) {
+			upgrade = random.nextBoolean();
+		} else if (!upgradable.isEmpty()) {
+			upgrade = true;
+		} else if (!addable.isEmpty()) {
+			upgrade = false;
+		} else {
+			return;
+		}
+
+		ItemEnchantments.Mutable mutable = new ItemEnchantments.Mutable(current);
+
+		if (upgrade) {
+			Holder<Enchantment> chosen = upgradable.get(random.nextInt(upgradable.size()));
+			mutable.set(chosen, current.getLevel(chosen) + 1);
+		} else {
+			Holder<Enchantment> chosen = addable.get(random.nextInt(addable.size()));
+			mutable.set(chosen, 1);
+		}
+
+		stack.set(componentType, mutable.toImmutable());
+	}
+
+	private static List<Holder<Enchantment>> addableEnchantments(final ServerPlayer player, final ItemStack stack,
+			final ItemEnchantments current) {
+		Optional<HolderSet.Named<Enchantment>> tableEnchants = player.level().registryAccess()
+				.lookupOrThrow(Registries.ENCHANTMENT)
+				.get(EnchantmentTags.IN_ENCHANTING_TABLE);
+
+		if (tableEnchants.isEmpty()) {
+			return List.of();
+		}
+
+		boolean book = stack.is(Items.ENCHANTED_BOOK);
+		List<Holder<Enchantment>> result = new ArrayList<>();
+
+		for (Holder<Enchantment> candidate : tableEnchants.get()) {
+			if (candidate.is(EnchantmentTags.CURSE) || current.getLevel(candidate) > 0) {
+				continue;
+			}
+
+			if (!book && !candidate.value().canEnchant(stack)) {
+				continue;
+			}
+
+			if (!EnchantmentHelper.isEnchantmentCompatible(current.keySet(), candidate)) {
+				continue;
+			}
+
+			result.add(candidate);
+		}
+
+		return result;
+	}
+}

@@ -36,6 +36,12 @@ public final class ModItems {
 	public static final Item ATHLETICS_KNOWLEDGE_100 = registerBook(Skill.ATHLETICS, 100);
 	public static final Item SNEAKING_KNOWLEDGE_25 = registerBook(Skill.SNEAKING, 25);
 	public static final Item SNEAKING_KNOWLEDGE_100 = registerBook(Skill.SNEAKING, 100);
+	public static final Item SMITHING_KNOWLEDGE_25 = registerBook(Skill.SMITHING, 25);
+	public static final Item SMITHING_KNOWLEDGE_100 = registerBook(Skill.SMITHING, 100);
+	public static final Item ALCHEMY_KNOWLEDGE_25 = registerBook(Skill.ALCHEMY, 25);
+	public static final Item ALCHEMY_KNOWLEDGE_100 = registerBook(Skill.ALCHEMY, 100);
+	public static final Item ENCHANTING_KNOWLEDGE_25 = registerBook(Skill.ENCHANTING, 25);
+	public static final Item ENCHANTING_KNOWLEDGE_100 = registerBook(Skill.ENCHANTING, 100);
 
 	private ModItems() {
 	}
@@ -73,6 +79,12 @@ public final class ModItems {
 			output.accept(ATHLETICS_KNOWLEDGE_100);
 			output.accept(SNEAKING_KNOWLEDGE_25);
 			output.accept(SNEAKING_KNOWLEDGE_100);
+			output.accept(SMITHING_KNOWLEDGE_25);
+			output.accept(SMITHING_KNOWLEDGE_100);
+			output.accept(ALCHEMY_KNOWLEDGE_25);
+			output.accept(ALCHEMY_KNOWLEDGE_100);
+			output.accept(ENCHANTING_KNOWLEDGE_25);
+			output.accept(ENCHANTING_KNOWLEDGE_100);
 		});
 	}
 }

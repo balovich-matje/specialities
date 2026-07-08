@@ -184,6 +184,21 @@ public class SkillsScreen extends Screen {
 				lines.add(Component.translatable("tooltip.specialities.stealth_crit",
 						String.format("%.2f", Tuning.stealthCritMultiplier(level))));
 			}
+			case SMITHING -> {
+				lines.add(Component.translatable("tooltip.specialities.resourcefulness", level));
+				lines.add(Component.translatable("tooltip.specialities.smelt_multicraft",
+						Math.round(Tuning.smeltChanceX2(level) * 100.0F),
+						Math.round(Tuning.smeltChanceX4(level) * 100.0F),
+						Math.round(Tuning.smeltChanceX8(level) * 100.0F)));
+			}
+			case ALCHEMY -> lines.add(Component.translatable("tooltip.specialities.brew_return",
+					Math.round(Tuning.alchemyReturnChance(level) * 100.0F)));
+			case ENCHANTING -> {
+				lines.add(Component.translatable("tooltip.specialities.enchant_discount",
+						Math.round(Tuning.enchantDiscountChance(level) * 100.0F)));
+				lines.add(Component.translatable("tooltip.specialities.enchant_luck",
+						Math.round(Tuning.enchantLuckChance(level) * 100.0F)));
+			}
 		}
 
 		boolean usesLuck = switch (skill) {

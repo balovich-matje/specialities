@@ -31,6 +31,10 @@ public final class ModAttachments {
 	public static final AttachmentType<Boolean> STEALTH_CRIT_DONE =
 			AttachmentRegistry.create(Specialities.id("stealth_crit_done"));
 
+	/** UUID of the player who last opened a brewing stand, for alchemy attribution. Transient. */
+	public static final AttachmentType<String> BREWING_OWNER =
+			AttachmentRegistry.create(Specialities.id("brewing_owner"));
+
 	private ModAttachments() {
 	}
 
