@@ -1,4 +1,6 @@
-# Specialities
+# Skill Proficiencies
+
+*(formerly “Specialities” — same mod, same mod id, your worlds and skill progress carry over untouched)*
 
 An mcMMO-inspired skill mod for **Minecraft 26.2 (Fabric)**. Do things, get better at them: every skill levels from 0 to 100 through normal vanilla gameplay and grants passive bonuses on that same activity — no new ores, dimensions, or menus to learn.
 

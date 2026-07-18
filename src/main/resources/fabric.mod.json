@@ -2,14 +2,14 @@
 	"schemaVersion": 1,
 	"id": "specialities",
 	"version": "${version}",
-	"name": "Specialities",
+	"name": "Skill Proficiencies",
 	"description": "Level up 15 RPG skills just by playing — mine, chop, fight, fish, sneak, craft. Bonuses stack with vanilla enchantments.",
 	"authors": [
 		"balovich-matje"
 	],
 	"contact": {
-		"homepage": "https://github.com/balovich-matje/specialities",
-		"sources": "https://github.com/balovich-matje/specialities"
+		"homepage": "https://github.com/balovich-matje/skill-proficiencies",
+		"sources": "https://github.com/balovich-matje/skill-proficiencies"
 	},
 	"license": "MIT",
 	"icon": "assets/specialities/icon.png",

@@ -1,6 +1,6 @@
-# Specialities — Architecture
+# Skill Proficiencies — Architecture
 
-Specialities is a Fabric mod (Minecraft 26.2) that adds an mcMMO-style skill
+Skill Proficiencies (mod id and code namespace: `specialities`) is a Fabric mod (Minecraft 26.2) that adds an mcMMO-style skill
 system: fifteen built-in skills that level from 0 to 100 through ordinary
 vanilla play, each granting passive bonuses on the same activity that trains it.
 This document is for contributors extending the mod — it explains how the pieces

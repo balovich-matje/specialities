@@ -96,7 +96,7 @@
 	"tool.specialities.axes": "axes",
 	"tool.specialities.hoes": "hoes",
 	"tool.specialities.shovels": "shovels",
-	"config.specialities.title": "Specialities",
+	"config.specialities.title": "Skill Proficiencies",
 	"config.specialities.category.combat": "Combat",
 	"config.specialities.category.skills": "Skills",
 	"config.specialities.category.general": "General",
