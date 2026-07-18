@@ -69,7 +69,7 @@ public class SpecialitiesClient implements ClientModInitializer {
 				// recipe book shifts leftPos without re-running init, so it
 				// re-anchors every tick.
 				BookmarkTab tab = new BookmarkTab(Component.translatable("screen.specialities.skills"),
-						() -> client.gui.setScreen(new SkillsScreen(screen)));
+						() -> client.setScreen(new SkillsScreen(screen)));
 				anchorTab((AbstractContainerScreen<?>) screen, tab);
 				Screens.getWidgets(screen).add(tab);
 
@@ -80,7 +80,7 @@ public class SpecialitiesClient implements ClientModInitializer {
 				// the top edge belongs to the real creative tabs, and
 				// creative shows no effect list to collide with.
 				Button button = Button.builder(Component.literal("S"),
-								b -> client.gui.setScreen(new SkillsScreen(screen)))
+								b -> client.setScreen(new SkillsScreen(screen)))
 						.bounds(0, 0, 20, 20)
 						.tooltip(Tooltip.create(Component.translatable("screen.specialities.skills")))
 						.build();
